@@ -6,8 +6,13 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="matthewbroyer.com: Practical browser tools for spreadsheet users. Free, local-first personal web apps.">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src https:; base-uri 'none'; form-action 'none'">
 <title>matthewbroyer.com: Personal Web Apps</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect width='44' height='44' rx='7' fill='%23a51d24'/%3E%3Ctext x='22' y='29' text-anchor='middle' font-family='Segoe UI,system-ui,-apple-system,sans-serif' font-size='18' font-weight='700' fill='%23ffffff'%3EMB%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+<script>
+// Clickjacking guard: GitHub Pages can't send frame-blocking headers, so refuse to display inside another site's frame.
+if (window.top !== window.self) { document.documentElement.style.display = "none"; try { window.top.location = window.self.location.href; } catch (_) {} }
+</script>
 <style>
 /* ---- theme: "Utility" — neutral desktop-software palette, one oxblood-red accent, light + dark ---- */
 :root{
@@ -123,36 +128,50 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 .filter{display:inline-flex;align-items:center;gap:5px;min-height:var(--ctl-sm);padding:0 11px;border:1px solid var(--border-strong);border-radius:var(--r-sm);background:var(--surface);color:var(--ink-2);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;transition:background-color var(--ease),border-color var(--ease),color var(--ease)}
 .filter:hover{border-color:var(--accent);color:var(--ink);background:var(--surface-2)}
 .filter.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
-.filter .n{font-variant-numeric:tabular-nums;opacity:.7;font-weight:500}
+.filter .n{font-variant-numeric:tabular-nums;font-weight:500}
 
 /* ---- app cards ---- */
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);transition:border-color var(--ease)}
-.card:hover{border-color:var(--border-strong)}
-.cardTop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:16px 16px 0}
+.card{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);transition:border-color var(--ease),box-shadow var(--ease)}
+.card:hover{border-color:var(--border-strong);box-shadow:0 2px 8px rgba(20,24,31,.07)}
+/* Header: title line (20px) + one tagline line (18px) = 38px = logo height */
+.cardTop{display:flex;align-items:flex-start;gap:12px;padding:16px}
+.cardHead{flex:1;min-width:0}
+.cardHead h3{margin:0;font-size:16px;font-weight:600;line-height:20px;letter-spacing:-.01em}
+.tagline{margin:0;font-size:13px;line-height:18px;color:var(--ink-2)}
+.cardTop .icon,.cardTop .pin{flex-shrink:0}
+/* Star centred on the title line, glyph flush with the card's right padding */
+.cardTop .pin{margin:calc(10px - var(--pin)/2) calc((17px - var(--pin))/2) 0 0}
 .icon{width:38px;height:38px;border-radius:var(--r);display:grid;place-items:center;font-size:17px;font-weight:700}
-.pin{width:32px;height:32px;display:grid;place-items:center;border:1px solid transparent;border-radius:var(--r-sm);background:none;color:var(--muted);cursor:pointer;transition:background-color var(--ease),color var(--ease),border-color var(--ease)}
+.icon.logo{background:none}
+.icon.logo img{width:100%;height:100%;display:block}
+.pin{--pin:32px;position:relative;z-index:1;width:var(--pin);height:var(--pin);display:grid;place-items:center;border:1px solid transparent;border-radius:var(--r-sm);background:none;color:var(--muted);cursor:pointer;transition:background-color var(--ease),color var(--ease),border-color var(--ease)}
 .pin:hover{background:var(--surface-2);color:var(--ink)}
 .pin svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
 .pin.active{color:var(--accent);background:var(--accent-soft);border-color:var(--accent-line)}
 .pin.active svg{fill:currentColor}
-.cardBody{flex:1;display:flex;flex-direction:column;padding:12px 16px 16px}
-.cardKicker{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
 .cat{display:inline-block;padding:2px 7px;border-radius:var(--r-sm);font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase}
 .domain{font-family:var(--mono);font-size:12px;color:var(--muted);overflow-wrap:anywhere}
-.card h2{margin:0 0 4px;font-size:18px;letter-spacing:-.015em}
-.tagline{font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:6px}
-.desc{margin:0 0 14px;font-size:13.5px;line-height:1.55;color:var(--muted)}
-.features{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
-.feature{font-size:11.5px;font-weight:550;padding:2px 7px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface-2);color:var(--ink-2)}
-.cardFooter{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px 10px 16px;border-top:1px solid var(--border);background:var(--surface-2);border-radius:0 0 var(--r) var(--r)}
-.liveWrap{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
-.liveDot{width:8px;height:8px;border-radius:50%;background:var(--border-strong);flex:none}
-.liveDot.live{background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 20%,transparent)}
+/* Footer: status + address on the left, actions on the right */
+.cardFooter{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px 10px 16px;border-top:1px solid var(--border)}
+.cardMeta{display:flex;align-items:center;gap:8px;min-width:0}
+.cardMeta .domain{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.liveDot{width:7px;height:7px;border-radius:50%;background:var(--border-strong);flex:none}
+.liveDot.live{background:var(--good)}
 .liveDot.offline{background:var(--crit)}
 .liveDot.checking{background:var(--warn)}
-.footerActions{display:flex;align-items:center;gap:6px}
+.liveNote{font-size:12px;color:var(--muted);white-space:nowrap}
+.liveNote.bad{color:var(--crit)}
+.footerActions{display:flex;align-items:center;gap:4px;flex:none}
 .details,.launch{min-height:var(--ctl-sm);padding:0 12px;font-size:13px}
+.card .details{position:relative;z-index:1;border-color:transparent;background:none;color:var(--ink-2);font-weight:500}
+.card .details:hover{background:var(--surface-2);color:var(--ink)}
+/* Open is the card's one link; its ::after stretches over the whole card so the card is clickable */
+.card .launch{background:var(--surface);border-color:var(--border-strong);color:var(--ink);font-weight:600;gap:4px;padding:0 10px 0 12px}
+.card .launch::after{content:"";position:absolute;inset:0;border-radius:var(--r)}
+.card .launch svg.i{width:14px;height:14px}
+.card:hover .launch{border-color:var(--accent);color:var(--accent)}
+.card .launch:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 
 .accent-finance{color:var(--c-finance);background:var(--c-finance-bg)}
 .accent-lifestyle{color:var(--c-lifestyle);background:var(--c-lifestyle-bg)}
@@ -214,8 +233,8 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 .footerLinks #triggerResetBtn:hover{background:color-mix(in srgb,var(--crit) 9%,transparent)}
 
 /* ---- dialogs ---- */
-.modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px;background:rgba(10,12,16,.45);opacity:0;pointer-events:none;transition:opacity var(--ease)}
-.modal.open{opacity:1;pointer-events:auto}
+.modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px;background:rgba(10,12,16,.45);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 120ms ease,visibility 0s linear 120ms}
+.modal.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity 120ms ease,visibility 0s}
 .modalCard{width:min(640px,100%);max-height:85vh;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border-strong);border-radius:8px;box-shadow:var(--shadow-pop);overflow:hidden}
 .modalCard.narrow{width:min(440px,100%)}
 .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 16px 14px 20px;border-bottom:1px solid var(--border)}
@@ -242,8 +261,8 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 .float-btn{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--border-strong);border-radius:var(--r);background:var(--surface);color:var(--ink-2);box-shadow:var(--shadow-pop);text-decoration:none;cursor:pointer;transition:background-color var(--ease),color var(--ease),opacity var(--ease)}
 .float-btn:hover{background:var(--surface-2);color:var(--accent)}
 .float-btn svg{width:18px;height:18px}
-#scrollTopBtn{opacity:0;pointer-events:none}
-#scrollTopBtn.visible{opacity:1;pointer-events:auto}
+#scrollTopBtn{opacity:0;visibility:hidden;pointer-events:none}
+#scrollTopBtn.visible{opacity:1;visibility:visible;pointer-events:auto}
 
 .storage-banner{position:fixed;left:20px;bottom:20px;z-index:100;max-width:440px;display:flex;align-items:center;gap:14px;padding:12px 12px 12px 16px;background:var(--surface);border:1px solid var(--border-strong);border-left:3px solid var(--accent);border-radius:var(--r);box-shadow:var(--shadow-pop);font-size:13px;line-height:1.5;color:var(--ink-2);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .15s ease,transform .15s ease,visibility .15s}
 .storage-banner.show{opacity:1;visibility:visible;transform:none}
@@ -267,7 +286,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 }
 @media(max-width:700px),(pointer:coarse){
   :root{--ctl:44px;--ctl-sm:44px}
-  .pin{width:44px;height:44px}
+  .pin{--pin:44px}
   .modalClose{width:44px;height:44px}
   .float-btn{width:44px;height:44px}
 }
@@ -323,7 +342,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
     <a href="#faq">FAQ</a>
     <span class="navStatus" title="Linked app reachability">
      <span id="navStatusDot" class="statusDot dim" aria-hidden="true"></span>
-     <span id="navStatusText">Checking</span>
+     <span id="navStatusText">Not checked</span>
     </span>
    </nav>
    <button id="themeToggle" class="btn btn-icon" type="button" aria-label="Switch to dark mode"></button>
@@ -376,12 +395,12 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
  <section class="section" aria-labelledby="status-title">
   <div class="sectionHead">
    <h2 id="status-title" class="sectionTitle">Network status</h2>
-   <div class="sectionMeta">Browser reachability checks. Refresh anytime.</div>
+   <div class="sectionMeta">Browser reachability checks. Runs only when you ask.</div>
   </div>
   <div class="statusBoard" role="status" aria-live="polite">
    <div class="statusBlock">
     <div class="statusLabel">System</div>
-    <div id="systemStatus" class="statusValue orange">Checking…</div>
+    <div id="systemStatus" class="statusValue white">Not checked</div>
    </div>
    <div class="statusBlock">
     <div class="statusLabel">Reachable</div>
@@ -392,13 +411,14 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
     <div id="offlineCount" class="statusValue white">—</div>
    </div>
    <div class="statusBlock statusActions">
-    <button id="refreshStatus" class="btn" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></svg>Refresh status</button>
+    <button id="refreshStatus" class="btn" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></svg>Check status</button>
    </div>
   </div>
-  <p class="statusNote">Status is a simple browser reachability test (not a full uptime guarantee). Linked apps are separate sites.</p>
+  <p class="statusNote">Checking sends one request from your browser to each linked app’s address, the same as visiting it (those sites’ hosts can see your IP address). It only tests whether each site responds; it is not an uptime guarantee.</p>
  </section>
 
- <section id="about" class="section" aria-label="About">
+ <section id="about" class="section" aria-labelledby="about-title">
+  <h2 id="about-title" class="vh">About</h2>
   <div class="about">
    <div class="aboutBlock">
     <div class="eyebrow">Built for personal workflow</div>
@@ -463,7 +483,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
  <div class="shell footerLine">
   <div><b>matthewbroyer.com</b> © 2026</div>
   <div class="footerNote">
-   <span>Independent project · free tools · <code>v5.4.0</code></span>
+   <span>Independent project · free tools · <code>v5.5.0</code></span>
    <span class="footerLinks">
     <button type="button" id="openPrivacy">Privacy</button>
     <button type="button" id="openTerms">Terms</button>
@@ -471,6 +491,10 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
     <button type="button" id="triggerResetBtn">Delete Local Data</button>
    </span>
   </div>
+ </div>
+ <div class="floating-group">
+  <a href="mailto:matthewbroyer@outlook.com" class="float-btn" aria-label="Contact Matthew by email" title="Email"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg></a>
+  <button id="scrollTopBtn" class="float-btn" type="button" aria-label="Scroll back to top" title="Back to top"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
  </div>
 </footer>
 
@@ -509,7 +533,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
   </div>
   <div class="modalBody legalBody">
    <p><strong>Last updated:</strong> September 2026</p>
-   <p>This page (matthewbroyer.com hub) is a free personal project. It does not require an account and does not use advertising or analytics scripts in this page’s code.</p>
+   <p>This page (the matthewbroyer.com hub) is a free personal project run by Matthew Broyer. It does not require an account, does not load advertising, analytics, fonts, or scripts from other companies, and its code does not set cookies.</p>
    <h3>What this hub stores on your device</h3>
    <ul>
     <li>Theme preference (light/dark)</li>
@@ -517,15 +541,18 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
     <li>Local launch counts for listed apps</li>
     <li>Whether you dismissed the local-storage notice</li>
    </ul>
-   <p>These values are kept in your browser’s local storage for this site. This page does not transmit that local data to a remote application server.</p>
+   <p>These values are kept in your browser’s local storage for this site. This page does not send them anywhere. They stay until you delete them with <strong>Delete Local Data</strong> in the footer or clear your browser’s site data. <strong>Export Hub Data</strong> saves a copy to your own device.</p>
    <h3>What leaves your browser</h3>
    <ul>
-    <li>Normal website hosting may log technical data such as IP address and user-agent (controlled by your host, not this HTML file).</li>
-    <li>Optional status checks request the listed app URLs from your browser to estimate reachability.</li>
-    <li>If you open a linked app or use the contact email link, your browser contacts those destinations.</li>
+    <li>This site is hosted on GitHub Pages. GitHub logs visitors’ IP addresses for security purposes, as it does for every GitHub Pages site. Those logs are controlled by GitHub, not by this page’s code, and are covered by the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a>.</li>
+    <li>If you press <strong>Check status</strong>, your browser sends one request to each listed app’s address to see whether it responds. Those sites’ hosts can see that request the way they would see a visit. Nothing from this page’s local storage is included.</li>
+    <li>If you open a linked app, your browser goes to that site.</li>
+    <li>If you email me, I receive your email address and whatever you write, and I use it to reply to you.</li>
    </ul>
    <h3>Linked apps</h3>
-   <p>Listed tools (for example mbmoney.online) are separate websites. Their storage and privacy practices are not fully controlled by this single hub page. Review each app you use.</p>
+   <p>Listed tools (for example mbmoney.online) are separate websites with their own privacy information. This policy covers only this hub page.</p>
+   <h3>Changes</h3>
+   <p>If this page starts handling data differently, this policy will be updated and the date above changed.</p>
    <h3>Children</h3>
    <p>This hub is not directed at children and does not knowingly collect children’s personal information.</p>
    <h3>Contact</h3>
@@ -547,9 +574,9 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
   </div>
   <div class="modalBody legalBody">
    <p><strong>Last updated:</strong> September 2026</p>
-   <p>By using this hub, you agree to these simple terms.</p>
+   <p>This hub is a free directory of browser tools run by Matthew Broyer (“the operator”). By using it, you agree to these simple terms.</p>
    <h3>Intended use</h3>
-   <p>Personal, lawful use of a free directory of browser tools. Not a regulated professional service.</p>
+   <p>Personal, lawful use. This is not a regulated professional service. Linked apps are separate sites and may post their own terms.</p>
    <h3>No professional advice</h3>
    <p>Nothing here is medical, legal, financial, tax, or investment advice. You are responsible for decisions you make.</p>
    <h3>Availability</h3>
@@ -557,9 +584,11 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
    <h3>Prohibited misuse</h3>
    <p>Do not attempt to disrupt the site, abuse contact channels, or use the tools for illegal activity.</p>
    <h3>Intellectual property</h3>
-   <p>Site design and branding for this project belong to the operator unless otherwise noted. Linked third-party names remain their owners’ marks and are used only to identify those tools.</p>
+   <p>The site’s design, text, and icons belong to the operator unless otherwise noted. Any other companies’ names or trademarks belong to their owners, and this site is not affiliated with or endorsed by them.</p>
    <h3>Limitation</h3>
    <p>The software is provided “as is,” without warranties of any kind to the fullest extent permitted by law. The operator is not liable for losses arising from use or inability to use the tools, except where liability cannot be limited under applicable law.</p>
+   <h3>Governing law</h3>
+   <p>These terms are governed by the laws of the State of New Hampshire, USA, except where the law of your state requires otherwise.</p>
    <h3>Changes</h3>
    <p>These terms may be updated by revising this page. Continued use after changes means you accept the updated terms.</p>
    <h3>Contact</h3>
@@ -588,11 +617,6 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
  </div>
 </div>
 
-<div class="floating-group">
- <a href="mailto:matthewbroyer@outlook.com" class="float-btn" aria-label="Contact Matthew by email" title="Email"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg></a>
- <button id="scrollTopBtn" class="float-btn" type="button" aria-label="Scroll back to top" title="Back to top"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
-</div>
-
 <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
 
 <div id="storageBanner" class="storage-banner" role="region" aria-label="Local storage notice">
@@ -607,19 +631,43 @@ const APPS = [
 {id:"mbactionplan",name:"Action Plan",domain:"mbactionplan.online",url:"https://mbactionplan.online",category:"Productivity",accent:"productivity",icon:"✓",tagline:"Get the right work done today.",description:"Focus on top priorities with a visual matrix and built-in timer. Task data is designed to stay on your machine in that app.",features:["Priority matrix","Focus timer","Projects","Local backup"]},
 {id:"mbauto",name:"Auto",domain:"mbauto.online",url:"https://mbauto.online",category:"Assets",accent:"assets",icon:"A",tagline:"Log maintenance and track fuel costs in one place.",description:"Keep service records, track cost of ownership, and know when maintenance is due.",features:["Service log","Fuel tracking","Repair history","Ownership costs"]},
 {id:"mbreading",name:"Reading",domain:"mbreading.online",url:"https://mbreading.online",category:"Knowledge",accent:"knowledge",icon:"B",tagline:"Turn books into usable knowledge.",description:"Track your reading queue and save takeaways next to the source material.",features:["Reading queue","Progress","Notes","Takeaways"]},
-{id:"mbgarden",name:"Garden",domain:"mbgarden.online",url:"https://mbgarden.online",category:"Lifestyle",accent:"lifestyle",icon:"✦",tagline:"Plan your planting schedule before the season gets complicated.",description:"Map garden beds and log harvests. Keep a record of what grew well for next year.",features:["Bed planning","Planting schedule","Crop tracking","Harvest log"]},
-{id:"mb8ball",name:"8 Ball",domain:"mb8ball.online",url:"https://mb8ball.online",category:"Utilities",accent:"utilities",icon:"8",tagline:"Settle decisions instantly.",description:"Roll the dice or consult the 8-ball for quick chance games. A lightweight randomizer for a fast answer.",features:["8-Ball","Dice","Chance games","Quick play"]}
+{id:"mbgardening",name:"Gardening",domain:"mbgarden.online",url:"https://mbgarden.online",category:"Lifestyle",accent:"lifestyle",icon:"✦",tagline:"Plan your planting schedule before the season gets complicated.",description:"Map garden beds and log harvests. Keep a record of what grew well for next year.",features:["Bed planning","Planting schedule","Crop tracking","Harvest log"]},
+{id:"mb8ball",name:"8 Ball",domain:"mb8ball.online",url:"https://mb8ball.online",category:"Utilities",accent:"utilities",icon:"8",tagline:"Settle decisions instantly.",description:"Roll the dice or shake the 8 Ball for quick chance games. A lightweight randomizer for fun, not for real decisions. Independent project; not affiliated with or endorsed by Mattel or its Magic 8 Ball toy.",features:["8-Ball","Dice","Chance games","Quick play"]}
 ];
+// Favicons copied from each live site (embedded so they work offline). Apps without one fall back to the text glyph.
+const LOGOS = {
+ mbmoney: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='#1e6b3c'/><g transform='translate(3.2 1.6) scale(1.067) translate(0 -1)' fill='none' stroke='#ffffff' stroke-width='2.9' stroke-linecap='round' stroke-linejoin='round'><path d='M4 19V11.5C4 7.5 11 7.5 11 11.5V19M11 11.5C11 6.5 20 6.5 20 10.5V19'/></g></svg>`,
+ mbmealprep: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='#0d6493'/><g transform='translate(6 6) scale(.8333)' fill='none' stroke='#fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 20L10.4 9.4A3 3 0 0 1 14.6 13.6Z'/><path d='M8.5 12.5l1.8 1.8M6.4 16l1.4 1.4'/><path d='M15 9l4.5-4.5M15 9c-.6-2-.2-3.8 1-5.2M15 9c2 .6 3.8.2 5.2-1'/></g></svg>`,
+ mbactionplan: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='#4f46e5'/><rect x='7' y='7' width='8' height='8' rx='1.5' fill='#ffffff'/><rect x='17' y='7' width='8' height='8' rx='1.5' fill='#ffffff' fill-opacity='.55'/><rect x='7' y='17' width='8' height='8' rx='1.5' fill='#ffffff' fill-opacity='.55'/><rect x='17' y='17' width='8' height='8' rx='1.5' fill='#ffffff' fill-opacity='.3'/></svg>`,
+ mbauto: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='#46596b'/><path d='M5.2 22.5a12 12 0 1 1 21.6 0' fill='none' stroke='#fff' stroke-width='3' stroke-linecap='round'/><path d='M16 18.5l6.2-7.4' stroke='#fff' stroke-width='2.4' stroke-linecap='round'/><circle cx='16' cy='18.5' r='2.8' fill='#fff'/><path d='M11 26h10' stroke='#fff' stroke-width='2.4' stroke-linecap='round'/></svg>`,
+ mbreading: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><rect width='28' height='28' rx='6' fill='#6b2f5e'/><g transform='translate(3 3) scale(.9167)'><path d='M11.25 10.4C9.1 9 5.8 8.6 2.5 9.1v10c3.3-.5 6.6 0 8.75 1.4z' fill='#fff'/><path d='M12.75 10.4c2.15-1.4 5.45-1.8 8.75-1.3v10c-3.3-.5-6.6 0-8.75 1.4z' fill='#fff'/><path d='M9.2 6.2a4 4 0 0 1 5.6 0M6.6 3.7a7.6 7.6 0 0 1 10.8 0' fill='none' stroke='#f2b640' stroke-width='1.9' stroke-linecap='round'/></g></svg>`,
+ mbgardening: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='#b8532f'/><g fill='#fff'><path d='M9 17.5h14l-1.9 8.1a1.3 1.3 0 0 1-1.3 1H12.2a1.3 1.3 0 0 1-1.3-1z'/><rect x='8' y='15.2' width='16' height='3.3' rx='.9'/><path d='M15.2 15.2V11h1.6v4.2z'/><path d='M16 12.4c-4.4 0-6.6-2.2-6.6-6.4 4.4 0 6.6 2.2 6.6 6.4z'/><path d='M16 11c0-3.8 2-5.8 6-5.8 0 3.8-2 5.8-6 5.8z'/></g></svg>`,
+ mb8ball: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='#111' stroke='#333' stroke-width='3'/><circle cx='50' cy='50' r='22' fill='white'/><text x='50' y='58' font-family='Arial, sans-serif' font-size='28' font-weight='900' text-anchor='middle' fill='#111'>8</text></svg>`
+};
+function appIcon(a) {
+ const svg = LOGOS[a.id];
+ return svg
+  ? `<div class="icon logo" aria-hidden="true"><img src="data:image/svg+xml,${encodeURIComponent(svg)}" alt="" width="38" height="38"></div>`
+  : `<div class="icon accent-${a.accent}" aria-hidden="true">${esc(a.icon)}</div>`;
+}
 const CATS = ["All", "Finance", "Lifestyle", "Productivity", "Assets", "Knowledge", "Utilities"];
 const STATUS = Object.fromEntries(APPS.map(a => [a.id, {state:"unknown"}]));
 const STATS_KEY = "mb_hub_launches_v5", PIN_KEY = "mb_hub_pins_v5", THEME_KEY = "mb_hub_theme", NOTICE_KEY = "mb_hub_notice_v5";
 
+// Validate anything read back from storage so a corrupted or hand-edited value can't break the page.
+const APP_IDS = APPS.map(a => a.id);
+function cleanPins(v) { return Array.isArray(v) ? v.filter(id => APP_IDS.includes(id)) : []; }
+function cleanLaunches(v) {
+ const out = {};
+ if (v && typeof v === "object" && !Array.isArray(v)) APP_IDS.forEach(id => { const n = Number(v[id]); if (Number.isFinite(n) && n > 0) out[id] = Math.floor(n); });
+ return out;
+}
 let state = {
  search: "",
  category: "All",
- launches: load(STATS_KEY, {}),
- pins: load(PIN_KEY, []),
- theme: load(THEME_KEY, "light")
+ launches: cleanLaunches(load(STATS_KEY, {})),
+ pins: cleanPins(load(PIN_KEY, [])),
+ theme: load(THEME_KEY, "light") === "dark" ? "dark" : "light"
 };
 
 let lastFocus = null;
@@ -672,21 +720,22 @@ function renderApps() {
   return `
  <article class="card" style="animation-delay: ${i * 0.05}s">
   <div class="cardTop">
-   <div class="icon accent-${a.accent}" aria-hidden="true">${esc(a.icon)}</div>
+   ${appIcon(a)}
+   <div class="cardHead">
+    <h3>${esc(a.name)}</h3>
+    <div class="tagline">${esc(a.tagline)}</div>
+   </div>
    <button class="pin ${p?"active":""}" data-pin="${a.id}" type="button" aria-pressed="${p}" aria-label="${p?"Unpin":"Pin"} ${esc(a.name)}" title="${p?"Unpin":"Pin to top"}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></button>
   </div>
-  <div class="cardBody">
-   <div class="cardKicker"><span class="cat accent-${a.accent}">${esc(a.category)}</span><span class="domain">${esc(a.domain)}</span></div>
-   <h2>${esc(a.name)}</h2>
-   <div class="tagline">${esc(a.tagline)}</div>
-   <p class="desc">${esc(a.description)}</p>
-   <div class="features">${a.features.map(f => `<span class="feature">${esc(f)}</span>`).join("")}</div>
-  </div>
   <div class="cardFooter">
-   <div class="liveWrap"><span class="liveDot ${s.state}" aria-hidden="true"></span><span class="liveText">${statusLabel(a)}</span></div>
+   <div class="cardMeta" title="${statusLabel(a)}">
+    <span class="liveDot ${s.state}" aria-hidden="true"></span>
+    <span class="domain">${esc(a.domain)}</span>
+    ${s.state === "offline" ? `<span class="liveNote bad">Unreachable</span>` : s.state === "checking" ? `<span class="liveNote">Checking…</span>` : `<span class="vh">${statusLabel(a)}</span>`}
+   </div>
    <div class="footerActions">
-    <button class="btn details" data-details="${a.id}" type="button">Details</button>
-    <a class="btn launch" data-launch="${a.id}" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer">Launch ↗</a>
+    <button class="btn details" data-details="${a.id}" type="button" aria-label="Details for ${esc(a.name)}">Details</button>
+    <a class="btn launch" data-launch="${a.id}" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.name)} in a new tab">Open<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
    </div>
   </div>
  </article>`;
@@ -701,13 +750,15 @@ async function checkApp(app) {
  STATUS[app.id].state = "checking"; renderApps();
  const c = new AbortController(), t = setTimeout(() => c.abort(), 7000);
  try {
-  await fetch(app.url + (app.url.includes("?")?"&":"?") + "_mb_status=" + Date.now(), {method:"GET", mode:"no-cors", cache:"no-store", signal:c.signal});
+  await fetch(app.url + (app.url.includes("?")?"&":"?") + "_mb_status=" + Date.now(), {method:"GET", mode:"no-cors", cache:"no-store", credentials:"omit", referrerPolicy:"no-referrer", signal:c.signal});
   STATUS[app.id].state = "live";
  } catch(e) { STATUS[app.id].state = "offline"; } finally { clearTimeout(t); }
  renderApps();
 }
 
 async function checkAll() {
+ if (checkAll.running) return; // ignore repeat clicks while a check is in progress
+ checkAll.running = true;
  document.getElementById("systemStatus").textContent = "Checking…"; document.getElementById("systemStatus").className = "statusValue orange";
  document.getElementById("navStatusDot").className = "statusDot dim"; document.getElementById("navStatusText").textContent = "Checking";
  APPS.forEach(a => STATUS[a.id].state = "checking"); renderApps();
@@ -717,6 +768,7 @@ async function checkAll() {
  document.getElementById("systemStatus").textContent = off === 0 ? "All reachable" : `${live}/${APPS.length} reachable`;
  document.getElementById("systemStatus").className = `statusValue ${off === 0 ? "green" : "orange"}`;
  document.getElementById("navStatusDot").className = `statusDot ${off === 0 ? "green" : "dim"}`; document.getElementById("navStatusText").textContent = `${live}/${APPS.length} reachable`;
+ checkAll.running = false;
 }
 
 function getFocusable(container) {
@@ -788,7 +840,7 @@ function exportHubData() {
   document.body.appendChild(a);
   a.click();
   a.remove();
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 1000); // revoking immediately can cancel the download in some browsers
   showToast("Exported");
 }
 
@@ -881,15 +933,26 @@ document.addEventListener("DOMContentLoaded", () => {
  document.getElementById("exportDataBtn").addEventListener("click", exportHubData);
  document.getElementById("triggerResetBtn").addEventListener("click", () => openModal("confirmModal"));
  document.getElementById("confirmResetBtn").addEventListener("click", () => {
-  localStorage.removeItem(STATS_KEY);
-  localStorage.removeItem(PIN_KEY);
-  localStorage.removeItem(THEME_KEY);
-  localStorage.removeItem(NOTICE_KEY);
-  localStorage.removeItem("mb_hub_cookie");
+  try {
+   [STATS_KEY, PIN_KEY, THEME_KEY, NOTICE_KEY, "mb_hub_cookie"].forEach(k => localStorage.removeItem(k));
+  } catch(_) {
+   closeModal("confirmModal");
+   showToast("Couldn’t reach browser storage. Clear this site’s data in your browser settings.");
+   return;
+  }
   window.location.reload();
  });
 
- checkAll();
+ // Shareable links: matthewbroyer.com/#privacy and /#terms open those notices directly.
+ function openFromHash() {
+  const h = location.hash.slice(1);
+  if (h === "privacy") openModal("privacyModal");
+  else if (h === "terms") openModal("termsModal");
+ }
+ openFromHash();
+ window.addEventListener("hashchange", openFromHash);
+
+ // Status checks contact the linked sites, so they run only when the visitor presses "Check status".
 });
 </script>
 </body>
