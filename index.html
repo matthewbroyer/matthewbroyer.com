@@ -111,6 +111,21 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 .sideText li{display:flex;gap:8px;align-items:flex-start}
 .sideText li svg{color:var(--accent);margin-top:2px}
 
+/* ---- donate banner ---- */
+.donateBanner{display:flex;align-items:center;gap:16px;margin:20px 0 0;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--r);box-shadow:var(--shadow)}
+.donateBanner[hidden]{display:none}
+.donateIconWrap{width:44px;height:44px;border-radius:var(--r);background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex:none}
+.donateIconWrap svg{width:24px;height:24px}
+.donateText{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.donateText strong{font-size:14.5px;color:var(--ink)}
+.donateText span{font-size:13px;line-height:1.55;color:var(--ink-2)}
+.donateActions{display:flex;align-items:center;gap:8px;flex:none;flex-wrap:wrap}
+@media(max-width:700px){
+  .donateBanner{flex-direction:column;align-items:stretch;text-align:left}
+  .donateActions{justify-content:stretch}
+  .donateActions .btn{flex:1}
+}
+
 /* ---- sections ---- */
 .section{margin-top:32px}
 .sectionHead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:12px}
@@ -228,8 +243,8 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 .footerLine b{font-weight:650;color:var(--ink)}
 .footerNote{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;color:var(--muted)}
 .footerLinks{display:flex;flex-wrap:wrap;gap:2px}
-.footerLinks button{min-height:var(--ctl-sm);padding:0 8px;border:none;border-radius:var(--r-sm);background:none;font-size:12.5px;font-weight:550;color:var(--ink-2);cursor:pointer;transition:background-color var(--ease),color var(--ease)}
-.footerLinks button:hover{background:var(--surface-2);color:var(--ink)}
+.footerLinks button,.footerLinks .flink{display:inline-flex;align-items:center;min-height:var(--ctl-sm);padding:0 8px;border:none;border-radius:var(--r-sm);background:none;font-size:12.5px;font-weight:550;color:var(--ink-2);text-decoration:none;cursor:pointer;transition:background-color var(--ease),color var(--ease)}
+.footerLinks button:hover,.footerLinks .flink:hover{background:var(--surface-2);color:var(--ink)}
 .footerLinks #triggerResetBtn{color:var(--crit)}
 .footerLinks #triggerResetBtn:hover{background:color-mix(in srgb,var(--crit) 9%,transparent)}
 
@@ -354,6 +369,17 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 </header>
 
 <main id="main-content" class="shell">
+ <div id="donateBanner" class="donateBanner" role="region" aria-label="Support this site" hidden>
+  <div class="donateIconWrap" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3.3c.5.9.2 1.5-.3 2.2M12.3 3.3c.5.9.2 1.5-.3 2.2"/></svg></div>
+  <div class="donateText">
+   <strong>These tools are free to use — they're not free to run.</strong>
+   <span>Hosting and domains for this hub and its apps cost real money every month. If they've saved you time, a one-time tip keeps them running.</span>
+  </div>
+  <div class="donateActions">
+   <a id="donateBtn" class="btn btnPrimary sm" href="https://buymeacoffee.com/matthewbroyer" target="_blank" rel="noopener noreferrer">☕ Buy me a coffee</a>
+   <button id="donateLaterBtn" class="btn sm" type="button">Remind me later</button>
+  </div>
+ </div>
  <section class="hero" aria-labelledby="heroTitle">
   <div class="heroGrid">
    <div class="heroMain">
@@ -461,7 +487,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
    <div class="faq-item">
     <button class="faq-btn" type="button" aria-expanded="false" aria-controls="faq-ans-2">Are these tools free?</button>
     <div class="faq-content" id="faq-ans-2" aria-hidden="true">
-     <p>This hub and the listed tools are offered free of charge with no required account on this page. Individual apps may change over time; if paid features ever appear, they should be stated clearly on that app.</p>
+     <p>This hub and the listed tools are offered free of charge with no required account on this page. Individual apps may change over time; if paid features ever appear, they should be stated clearly on that app. There's an optional "Buy me a coffee" link near the top and in the footer for anyone who wants to help cover hosting costs—it's never required.</p>
     </div>
    </div>
    <div class="faq-item">
@@ -473,7 +499,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
    <div class="faq-item">
     <button class="faq-btn" type="button" aria-expanded="false" aria-controls="faq-ans-4">How do I export or delete hub data?</button>
     <div class="faq-content" id="faq-ans-4" aria-hidden="true">
-     <p>Use Export Hub Data or Delete Local Data in the footer. Delete removes this site’s local storage keys for theme, pins, launch counts, and the storage notice preference in this browser.</p>
+     <p>Use Export Hub Data or Delete Local Data in the footer. Delete removes this site’s local storage keys for theme, pins, launch counts, the storage notice preference, and the donation-reminder snooze date in this browser.</p>
     </div>
    </div>
   </div>
@@ -486,6 +512,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
   <div class="footerNote">
    <span>Independent project · free tools · <code>v5.5.0</code></span>
    <span class="footerLinks">
+    <a class="flink" href="https://buymeacoffee.com/matthewbroyer" target="_blank" rel="noopener noreferrer">☕ Support this site</a>
     <button type="button" id="openPrivacy">Privacy</button>
     <button type="button" id="openTerms">Terms</button>
     <button type="button" id="exportDataBtn">Export Hub Data</button>
@@ -541,6 +568,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
     <li>Pinned app IDs</li>
     <li>Local launch counts for listed apps</li>
     <li>Whether you dismissed the local-storage notice</li>
+    <li>When you last dismissed the donation reminder (so it can wait before showing again)</li>
    </ul>
    <p>These values are kept in your browser’s local storage for this site. This page does not send them anywhere. They stay until you delete them with <strong>Delete Local Data</strong> in the footer or clear your browser’s site data. <strong>Export Hub Data</strong> saves a copy to your own device.</p>
    <h3>What leaves your browser</h3>
@@ -548,6 +576,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
     <li>This site is hosted on GitHub Pages. GitHub logs visitors’ IP addresses for security purposes, as it does for every GitHub Pages site. Those logs are controlled by GitHub, not by this page’s code, and are covered by the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a>.</li>
     <li>If you press <strong>Check status</strong>, your browser sends one request to each listed app’s address to see whether it responds. Those sites’ hosts can see that request the way they would see a visit. Nothing from this page’s local storage is included.</li>
     <li>If you open a linked app, your browser goes to that site.</li>
+    <li>If you click “Buy me a coffee,” your browser opens buymeacoffee.com, a separate service with its own privacy policy. This page does not send it any of your local storage data.</li>
     <li>If you email me, I receive your email address and whatever you write, and I use it to reply to you.</li>
    </ul>
    <h3>Linked apps</h3>
@@ -609,7 +638,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
    <button class="modalClose" data-close="confirmModal" type="button" aria-label="Cancel">×</button>
   </div>
   <div class="modalBody">
-   <p id="confirmDesc">This permanently erases this site’s saved pins, launch statistics, theme preference, and storage-notice preference from this browser. It cannot be undone. Linked apps’ own data is not deleted by this action.</p>
+   <p id="confirmDesc">This permanently erases this site’s saved pins, launch statistics, theme preference, storage-notice preference, and donation-reminder snooze date from this browser. It cannot be undone. Linked apps’ own data is not deleted by this action.</p>
   </div>
   <div class="modalFoot">
    <button class="btn" data-close="confirmModal" type="button">Cancel</button>
@@ -657,7 +686,8 @@ function appIcon(a) {
 }
 const CATS = ["All", "Finance", "Lifestyle", "Productivity", "Assets", "Knowledge", "Utilities"];
 const STATUS = Object.fromEntries(APPS.map(a => [a.id, {state:"unknown"}]));
-const STATS_KEY = "mb_hub_launches_v5", PIN_KEY = "mb_hub_pins_v5", THEME_KEY = "mb_hub_theme", NOTICE_KEY = "mb_hub_notice_v5";
+const STATS_KEY = "mb_hub_launches_v5", PIN_KEY = "mb_hub_pins_v5", THEME_KEY = "mb_hub_theme", NOTICE_KEY = "mb_hub_notice_v5", DONATE_KEY = "mb_hub_donate_dismiss_v1";
+const DONATE_SNOOZE_MS = 30 * 24 * 60 * 60 * 1000; // "Remind me later" (or clicking donate) waits 30 days before showing again — at least monthly
 
 // Validate anything read back from storage so a corrupted or hand-edited value can't break the page.
 const APP_IDS = APPS.map(a => a.id);
@@ -835,7 +865,8 @@ function exportHubData() {
     site: "matthewbroyer.com hub",
     theme: state.theme,
     pins: state.pins,
-    launches: state.launches
+    launches: state.launches,
+    donateReminderLastDismissedAt: load(DONATE_KEY, null)
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
@@ -933,13 +964,25 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("storageBanner").classList.remove("show");
  });
 
+ // Donation reminder: shows on first visit, then waits 30 days after either button is used ("remind me later" or "buy me a coffee").
+ const lastDonateDismiss = load(DONATE_KEY, 0);
+ if (!lastDonateDismiss || (Date.now() - lastDonateDismiss) >= DONATE_SNOOZE_MS) {
+  setTimeout(() => { document.getElementById("donateBanner").hidden = false; }, 700);
+ }
+ function snoozeDonateBanner() {
+  save(DONATE_KEY, Date.now());
+  document.getElementById("donateBanner").hidden = true;
+ }
+ document.getElementById("donateLaterBtn").addEventListener("click", snoozeDonateBanner);
+ document.getElementById("donateBtn").addEventListener("click", snoozeDonateBanner);
+
  document.getElementById("openPrivacy").addEventListener("click", () => openModal("privacyModal"));
  document.getElementById("openTerms").addEventListener("click", () => openModal("termsModal"));
  document.getElementById("exportDataBtn").addEventListener("click", exportHubData);
  document.getElementById("triggerResetBtn").addEventListener("click", () => openModal("confirmModal"));
  document.getElementById("confirmResetBtn").addEventListener("click", () => {
   try {
-   [STATS_KEY, PIN_KEY, THEME_KEY, NOTICE_KEY, "mb_hub_cookie"].forEach(k => localStorage.removeItem(k));
+   [STATS_KEY, PIN_KEY, THEME_KEY, NOTICE_KEY, DONATE_KEY, "mb_hub_cookie"].forEach(k => localStorage.removeItem(k));
   } catch(_) {
    closeModal("confirmModal");
    showToast("Couldn’t reach browser storage. Clear this site’s data in your browser settings.");
