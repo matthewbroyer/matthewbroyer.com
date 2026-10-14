@@ -6,9 +6,22 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="matthewbroyer.com: Practical browser tools for spreadsheet users. Free, local-first personal web apps.">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src https:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src https:; base-uri 'none'; form-action 'none'">
 <title>matthewbroyer.com: Personal Web Apps</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%232563EB'/%3E%3Crect x='14' y='14' width='16' height='16' rx='4' fill='%23fff'/%3E%3Crect x='34' y='14' width='16' height='16' rx='4' fill='%23F2B640'/%3E%3Crect x='14' y='34' width='16' height='16' rx='4' fill='%23fff'/%3E%3Crect x='34' y='34' width='16' height='16' rx='4' fill='%23fff'/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="canonical" href="https://matthewbroyer.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="matthewbroyer.com">
+<meta property="og:url" content="https://matthewbroyer.com/">
+<meta property="og:title" content="matthewbroyer.com: free browser apps by Matthew Broyer">
+<meta property="og:description" content="Free, local-first web apps for money, pay, meals, notes, reading, garden, fishing, weather and more. Open them in your browser or install them.">
+<meta property="og:image" content="https://matthewbroyer.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="matthewbroyer.com: free browser apps by Matthew Broyer">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script>
 // Clickjacking guard: GitHub Pages can't send frame-blocking headers, so refuse to display inside another site's frame.
 if (window.top !== window.self) { document.documentElement.style.display = "none"; try { window.top.location = window.self.location.href; } catch (_) {} }
@@ -81,8 +94,8 @@ section[id],[id$="-title"]{scroll-margin-top:calc(var(--bar-h) + 16px)}
 .topbar{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
 .topbarInner{height:var(--bar-h);display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
-.brandMark svg{width:20px;height:20px;display:block}
-.brandMark{width:30px;height:30px;border-radius:var(--r);background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:12.5px;font-weight:700;letter-spacing:.02em;flex:none}
+.brandMark svg{width:30px;height:30px;display:block}
+.brandMark{width:30px;height:30px;border-radius:var(--r);background:none;color:var(--accent-ink);display:grid;place-items:center;font-size:12.5px;font-weight:700;letter-spacing:.02em;flex:none}
 .brandName{display:block;font-size:14.5px;font-weight:650;line-height:1.15}
 .brandSub{display:block;font-size:11px;color:var(--muted);letter-spacing:.01em}
 .headerActions{display:flex;align-items:center;gap:6px;height:100%}
@@ -110,21 +123,6 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 .sideText{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:13.5px;color:var(--ink-2)}
 .sideText li{display:flex;gap:8px;align-items:flex-start}
 .sideText li svg{color:var(--accent);margin-top:2px}
-
-/* ---- donate banner ---- */
-.donateBanner{display:flex;align-items:center;gap:16px;margin:20px 0 0;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--r);box-shadow:var(--shadow)}
-.donateBanner[hidden]{display:none}
-.donateIconWrap{width:44px;height:44px;border-radius:var(--r);background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex:none}
-.donateIconWrap svg{width:24px;height:24px}
-.donateText{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.donateText strong{font-size:14.5px;color:var(--ink)}
-.donateText span{font-size:13px;line-height:1.55;color:var(--ink-2)}
-.donateActions{display:flex;align-items:center;gap:8px;flex:none;flex-wrap:wrap}
-@media(max-width:700px){
-  .donateBanner{flex-direction:column;align-items:stretch;text-align:left}
-  .donateActions{justify-content:stretch}
-  .donateActions .btn{flex:1}
-}
 
 /* ---- sections ---- */
 .section{margin-top:32px}
@@ -180,9 +178,13 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 .liveNote.bad{color:var(--crit)}
 .footerActions{display:flex;align-items:center;gap:4px;flex:none}
 .details,.launch{min-height:var(--ctl-sm);padding:0 12px;font-size:13px}
+.card .details{width:var(--ctl-sm);padding:0}
 .card .details{position:relative;z-index:1;border-color:transparent;background:none;color:var(--ink-2);font-weight:500}
 .card .details:hover{background:var(--surface-2);color:var(--ink)}
 /* Open is the card's one link; its ::after stretches over the whole card so the card is clickable */
+.card .install{position:relative;z-index:1;min-height:var(--ctl-sm);padding:0 12px;font-size:13px;font-weight:600;color:var(--ink-2);background:var(--surface);border-color:var(--border-strong)}
+.card .install:hover{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.modalFoot [hidden]{display:none}
 .card .launch{background:var(--surface);border-color:var(--border-strong);color:var(--ink);font-weight:600;gap:4px;padding:0 10px 0 12px}
 .card .launch::after{content:"";position:absolute;inset:0;border-radius:var(--r)}
 .card .launch svg.i{width:14px;height:14px}
@@ -344,7 +346,8 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 <header class="topbar">
  <div class="shell topbarInner">
   <a class="brand" href="#">
-   <span class="brandMark" aria-hidden="true"><svg viewBox="12 12 40 40"><rect x="14" y="14" width="16" height="16" rx="4" fill="currentColor"/><rect x="34" y="14" width="16" height="16" rx="4" fill="#F2B640"/><rect x="14" y="34" width="16" height="16" rx="4" fill="currentColor"/><rect x="34" y="34" width="16" height="16" rx="4" fill="currentColor"/></svg></span>
+   <span class="brandMark" aria-hidden="true"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="hbg" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#4B7FF0"/><stop offset=".55" stop-color="#2563EB"/><stop offset="1" stop-color="#1A4FC4"/></linearGradient><clipPath id="hbc"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#hbc)"><rect width="64" height="64" fill="url(#hbg)"/><g fill="#fff"><circle cx="20" cy="20" r="5.2"/><circle cx="32" cy="20" r="5.2"/><circle cx="20" cy="32" r="5.2"/><circle cx="32" cy="32" r="5.2"/><circle cx="44" cy="32" r="5.2"/><circle cx="20" cy="44" r="5.2"/><circle cx="32" cy="44" r="5.2"/><circle cx="44" cy="44" r="5.2"/></g>
+<path d="M39.5 24.5 48 16M41 16h7v7" fill="none" stroke="#F2B640" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></g></svg></span>
    <span>
     <span class="brandName">matthewbroyer.com</span>
     <span class="brandSub">Personal web apps</span>
@@ -369,17 +372,6 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 </header>
 
 <main id="main-content" class="shell">
- <div id="donateBanner" class="donateBanner" role="region" aria-label="Support this site" hidden>
-  <div class="donateIconWrap" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3.3c.5.9.2 1.5-.3 2.2M12.3 3.3c.5.9.2 1.5-.3 2.2"/></svg></div>
-  <div class="donateText">
-   <strong>These tools are free to use — they're not free to run.</strong>
-   <span>Hosting and domains for this hub and its apps cost real money every month. If they've saved you time, a one-time tip keeps them running.</span>
-  </div>
-  <div class="donateActions">
-   <a id="donateBtn" class="btn btnPrimary sm" href="https://buymeacoffee.com/matthewbroyer" target="_blank" rel="noopener noreferrer">☕ Buy me a coffee</a>
-   <button id="donateLaterBtn" class="btn sm" type="button">Remind me later</button>
-  </div>
- </div>
  <section class="hero" aria-labelledby="heroTitle">
   <div class="heroGrid">
    <div class="heroMain">
@@ -487,7 +479,13 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
    <div class="faq-item">
     <button class="faq-btn" type="button" aria-expanded="false" aria-controls="faq-ans-2">Are these tools free?</button>
     <div class="faq-content" id="faq-ans-2" aria-hidden="true">
-     <p>This hub and the listed tools are offered free of charge with no required account on this page. Individual apps may change over time; if paid features ever appear, they should be stated clearly on that app. There's an optional "Buy me a coffee" link near the top and in the footer for anyone who wants to help cover hosting costs—it's never required.</p>
+     <p>This hub and the listed tools are offered free of charge with no required account on this page. Individual apps may change over time; if paid features ever appear, they should be stated clearly on that app. There's an optional "Support this site" link in the footer for anyone who wants to help cover hosting costs. It's never required.</p>
+    </div>
+   </div>
+   <div class="faq-item">
+    <button class="faq-btn" type="button" aria-expanded="false" aria-controls="faq-ans-install">Can I install these apps like regular apps?</button>
+    <div class="faq-content" id="faq-ans-install" aria-hidden="true">
+     <p>Yes. Press <strong>Install</strong> on an app’s card: the app opens and shows its own install prompt. In Chrome or Edge on a computer or Android, that’s a real Install button. On iPhone or iPad, tap Share, then Add to Home Screen. Firefox on a computer can’t install web apps, so you can still use them in a tab. Installed apps open in their own window and keep your data in the same place as the website version on that device.</p>
     </div>
    </div>
    <div class="faq-item">
@@ -499,7 +497,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
    <div class="faq-item">
     <button class="faq-btn" type="button" aria-expanded="false" aria-controls="faq-ans-4">How do I export or delete hub data?</button>
     <div class="faq-content" id="faq-ans-4" aria-hidden="true">
-     <p>Use Export Hub Data or Delete Local Data in the footer. Delete removes this site’s local storage keys for theme, pins, launch counts, the storage notice preference, and the donation-reminder snooze date in this browser.</p>
+     <p>Use Export Hub Data or Delete Local Data in the footer. Delete removes this site’s local storage keys for theme, pins, launch counts and the storage notice preference in this browser.</p>
     </div>
    </div>
   </div>
@@ -510,7 +508,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
  <div class="shell footerLine">
   <div><b>matthewbroyer.com</b> © 2026</div>
   <div class="footerNote">
-   <span>Independent project · free tools · <code>v5.5.0</code></span>
+   <span>Independent project · free tools · <code>v5.6.0</code></span>
    <span class="footerLinks">
     <a class="flink" href="https://buymeacoffee.com/matthewbroyer" target="_blank" rel="noopener noreferrer">☕ Support this site</a>
     <button type="button" id="openPrivacy">Privacy</button>
@@ -547,7 +545,8 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
   </div>
   <div class="modalFoot">
    <button id="modalCopy" class="btn" type="button">Copy URL</button>
-   <a id="modalLaunch" class="btn launch" href="#" target="_blank" rel="noopener noreferrer">Launch app ↗</a>
+   <a id="modalInstall" class="btn" href="#">Install</a>
+   <a id="modalLaunch" class="btn launch" href="#">Open app</a>
   </div>
  </div>
 </div>
@@ -560,7 +559,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
    <button class="modalClose" data-close="privacyModal" type="button" aria-label="Close">×</button>
   </div>
   <div class="modalBody legalBody">
-   <p><strong>Last updated:</strong> September 2026</p>
+   <p><strong>Last updated:</strong> October 2026</p>
    <p>This page (the matthewbroyer.com hub) is a free personal project run by Matthew Broyer. It does not require an account, does not load advertising, analytics, fonts, or scripts from other companies, and its code does not set cookies.</p>
    <h3>What this hub stores on your device</h3>
    <ul>
@@ -568,7 +567,6 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
     <li>Pinned app IDs</li>
     <li>Local launch counts for listed apps</li>
     <li>Whether you dismissed the local-storage notice</li>
-    <li>When you last dismissed the donation reminder (so it can wait before showing again)</li>
    </ul>
    <p>These values are kept in your browser’s local storage for this site. This page does not send them anywhere. They stay until you delete them with <strong>Delete Local Data</strong> in the footer or clear your browser’s site data. <strong>Export Hub Data</strong> saves a copy to your own device.</p>
    <h3>What leaves your browser</h3>
@@ -576,7 +574,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
     <li>This site is hosted on GitHub Pages. GitHub logs visitors’ IP addresses for security purposes, as it does for every GitHub Pages site. Those logs are controlled by GitHub, not by this page’s code, and are covered by the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a>.</li>
     <li>If you press <strong>Check status</strong>, your browser sends one request to each listed app’s address to see whether it responds. Those sites’ hosts can see that request the way they would see a visit. Nothing from this page’s local storage is included.</li>
     <li>If you open a linked app, your browser goes to that site.</li>
-    <li>If you click “Buy me a coffee,” your browser opens buymeacoffee.com, a separate service with its own privacy policy. This page does not send it any of your local storage data.</li>
+    <li>If you click “Support this site,” your browser opens buymeacoffee.com, a separate service with its own privacy policy. This page does not send it any of your local storage data.</li>
     <li>If you email me, I receive your email address and whatever you write, and I use it to reply to you.</li>
    </ul>
    <h3>Linked apps</h3>
@@ -638,7 +636,7 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
    <button class="modalClose" data-close="confirmModal" type="button" aria-label="Cancel">×</button>
   </div>
   <div class="modalBody">
-   <p id="confirmDesc">This permanently erases this site’s saved pins, launch statistics, theme preference, storage-notice preference, and donation-reminder snooze date from this browser. It cannot be undone. Linked apps’ own data is not deleted by this action.</p>
+   <p id="confirmDesc">This permanently erases this site’s saved pins, launch statistics, theme preference, and storage-notice preference from this browser. It cannot be undone. Linked apps’ own data is not deleted by this action.</p>
   </div>
   <div class="modalFoot">
    <button class="btn" data-close="confirmModal" type="button">Cancel</button>
@@ -656,30 +654,35 @@ h1{margin:8px 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;letter-spacin
 
 <script>
 const APPS = [
-{id:"mbmoney",name:"Money",domain:"mbmoney.online",url:"https://mbmoney.online",category:"Finance",accent:"finance",icon:"$",tagline:"Track your net worth without the spreadsheet maze.",description:"See cash flow and savings goals in one simple dashboard. Manage personal wealth without complex accounting software.",features:["Wealth tracking","Cash flow","Savings goals","Account overview"]},
-{id:"mbwishlist",name:"Wishlist",domain:"mbwishlist.online",url:"https://mbwishlist.online",category:"Finance",accent:"finance",icon:"W",tagline:"Plan purchases before you spend.",description:"Keep planned purchases in one list, sorted by need vs. want, price, and need-by date. Check items out from a cart and see your spend totals in Purchased history.",features:["Need vs. want","Cart & checkout","Purchase history","JSON/CSV backup"]},
-{id:"mbmealprep",name:"Meal Prep",domain:"mbmealprep.online",url:"https://mbmealprep.online",category:"Lifestyle",accent:"lifestyle",icon:"＋",tagline:"Generate your weekly grocery list automatically.",description:"Scale recipes and hit nutrition targets without manual math. Plan meals quickly so you can get in and out of the kitchen.",features:["Recipe scaling","Grocery list","Nutrition targets","Weekly planning"]},
-{id:"mbactionplan",name:"Action Plan",domain:"mbactionplan.online",url:"https://mbactionplan.online",category:"Productivity",accent:"productivity",icon:"✓",tagline:"Get the right work done today.",description:"Focus on top priorities with a visual matrix and built-in timer. Task data is designed to stay on your machine in that app.",features:["Priority matrix","Focus timer","Projects","Local backup"]},
-{id:"mbauto",name:"Auto",domain:"mbauto.online",url:"https://mbauto.online",category:"Assets",accent:"assets",icon:"A",tagline:"Log maintenance and track fuel costs in one place.",description:"Keep service records, track cost of ownership, and know when maintenance is due.",features:["Service log","Fuel tracking","Repair history","Ownership costs"]},
-{id:"mbreading",name:"Reading",domain:"mbreading.online",url:"https://mbreading.online",category:"Knowledge",accent:"knowledge",icon:"B",tagline:"Turn books into usable knowledge.",description:"Track your reading queue and save takeaways next to the source material.",features:["Reading queue","Progress","Notes","Takeaways"]},
-{id:"mbgardening",name:"Garden",domain:"mbgarden.online",url:"https://mbgarden.online",category:"Lifestyle",accent:"lifestyle",icon:"✦",tagline:"Plan your planting schedule before the season gets complicated.",description:"Map garden beds and log harvests. Keep a record of what grew well for next year.",features:["Bed planning","Planting schedule","Crop tracking","Harvest log"]},
-{id:"mbfishing",name:"Fishing",domain:"mbfishing.online",url:"https://mbfishing.online",category:"Lifestyle",accent:"lifestyle",icon:"F",tagline:"Log a catch with one tap.",description:"Record each fish as you catch it, then look back through your catches on a map and in simple stats. No account needed; your catches are saved in your browser, not on a server.",features:["One-tap logging","Catch history","Map","Stats"]},
-{id:"mbweather",name:"Weather",domain:"mbweather.online",url:"https://mbweather.online",category:"Utilities",accent:"utilities",icon:"W",tagline:"Check the forecast without the clutter.",description:"See your forecast, hourly outlook, radar and alerts in one fast browser app. Your settings stay on this device; weather services receive only the coordinates you look up.",features:["Forecast","Hourly","Radar","Alerts"]},
-{id:"mbarcade",name:"Arcade",domain:"mbarcade.online",url:"https://mbarcade.online",category:"Utilities",accent:"utilities",icon:"A",tagline:"Four quick games, zero fuss.",description:"A free 4-in-1 arcade of quick chance games: 8-Ball, Red/Black, Roulette and Cee-Lo. Just for fun; no real money. Independent project; not affiliated with or endorsed by Mattel or its Magic 8 Ball toy.",features:["8-Ball","Red/Black","Roulette","Cee-Lo"]}
+{id:"mbmoney",name:"Money",domain:"mbmoney.online",url:"https://mbmoney.online",category:"Finance",accent:"finance",icon:"$",install:true,tagline:"Track your net worth without the spreadsheet maze.",description:"See cash flow and savings goals in one simple dashboard. Manage personal wealth without complex accounting software.",features:["Wealth tracking","Cash flow","Savings goals","Account overview"]},
+{id:"mbwishlist",name:"Wishlist",domain:"mbwishlist.online",url:"https://mbwishlist.online",category:"Finance",accent:"finance",icon:"W",install:true,tagline:"Plan purchases before you spend.",description:"Keep planned purchases in one list, sorted by need vs. want, price, and need-by date. Check items out from a cart and see your spend totals in Purchased history.",features:["Need vs. want","Cart & checkout","Purchase history","JSON/CSV backup"]},
+{id:"mbmealprep",name:"Meal Prep",domain:"mbmealprep.online",url:"https://mbmealprep.online",category:"Lifestyle",accent:"lifestyle",icon:"＋",install:true,tagline:"Generate your weekly grocery list automatically.",description:"Scale recipes and hit nutrition targets without manual math. Plan meals quickly so you can get in and out of the kitchen.",features:["Recipe scaling","Grocery list","Nutrition targets","Weekly planning"]},
+{id:"mbactionplan",name:"Action Plan",domain:"mbactionplan.online",url:"https://mbactionplan.online",category:"Productivity",accent:"productivity",icon:"✓",install:true,tagline:"Get the right work done today.",description:"Focus on top priorities with a visual matrix and built-in timer. Task data is designed to stay on your machine in that app.",features:["Priority matrix","Focus timer","Projects","Local backup"]},
+{id:"mbauto",name:"Auto",domain:"mbauto.online",url:"https://mbauto.online",category:"Assets",accent:"assets",icon:"A",install:true,tagline:"Log maintenance and track fuel costs in one place.",description:"Keep service records, track cost of ownership, and know when maintenance is due.",features:["Service log","Fuel tracking","Repair history","Ownership costs"]},
+{id:"mbreading",name:"Reading",domain:"mbreading.online",url:"https://mbreading.online",category:"Knowledge",accent:"knowledge",icon:"B",install:true,tagline:"Turn books into usable knowledge.",description:"Track your reading queue and save takeaways next to the source material.",features:["Reading queue","Progress","Notes","Takeaways"]},
+{id:"mbgardening",name:"Garden",domain:"mbgarden.online",url:"https://mbgarden.online",category:"Lifestyle",accent:"lifestyle",icon:"✦",install:true,tagline:"Plan your planting schedule before the season gets complicated.",description:"Map garden beds and log harvests. Keep a record of what grew well for next year.",features:["Bed planning","Planting schedule","Crop tracking","Harvest log"]},
+{id:"mbfishing",name:"Fishing",domain:"mbfishing.online",url:"https://mbfishing.online",category:"Lifestyle",accent:"lifestyle",icon:"F",install:true,tagline:"Log a catch with one tap.",description:"Record each fish as you catch it, then look back through your catches on a map and in simple stats. No account needed; your catches are saved in your browser, not on a server.",features:["One-tap logging","Catch history","Map","Stats"]},
+{id:"mbnotes",name:"Notes",domain:"mbnotes.online",url:"https://mbnotes.online",category:"Productivity",accent:"productivity",icon:"N",install:true,tagline:"Quick notes and checklists that stay on your device.",description:"Write notes and checklists, pin, tag and link them, and import from Google Keep. Runs in your browser with no account.",features:["Notes & checklists","Tags & links","Google Keep import","Archive & trash"]},
+{id:"mbpayday",name:"Payday",domain:"mbpayday.online",url:"https://mbpayday.online",category:"Finance",accent:"finance",icon:"P",install:true,tagline:"Track your hours. Check your pay.",description:"Log shifts or clock in and out, estimate overtime and take-home pay, and compare it with your paystubs. Pay and tax figures are rough planning estimates.",features:["Time clock","Overtime by job","Take-home estimate","Paystub check"]},
+{id:"mbweather",name:"Weather",domain:"mbweather.online",url:"https://mbweather.online",category:"Utilities",accent:"utilities",icon:"W",install:true,tagline:"Check the forecast without the clutter.",description:"See your forecast, hourly outlook, radar and alerts in one fast browser app. Your settings stay on this device; weather services receive only the coordinates you look up.",features:["Forecast","Hourly","Radar","Alerts"]},
 ];
-// Favicons copied from each live site (embedded so they work offline). Apps without one fall back to the text glyph.
+// Logos: each app's own favicon.svg, copied in (embedded so the hub never loads anything from the apps).
 const LOGOS = {
- mbmoney: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" ><rect width="64" height="64" rx="13" fill="#087F5B"/><g ><path d="m 20,47.625 v -9 m 12,9 v -16 m 12,16 v -13" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/><path d="m 17,26.625 10.5,-6.5 7.5,3.5 11,-8" fill="none" stroke="#f2b640" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></g></svg>`,
- mbwishlist: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" ><rect width="64" height="64" rx="13" fill="#D97706"/><g transform="translate(0,-0.02416552)"><path d="m 17,24.524164 h 30 l -2.5,26 h -25 z" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="m 25,24.524164 v -4 a 7,7 0 0 1 14,0 v 4" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="m 32,43.341388 c -4.6,-3 -7.2,-5.4 -7.2,-8.1 a 3.7,3.7 0 0 1 7.2,-1.2 3.7,3.7 0 0 1 7.2,1.2 c 0,2.7 -2.6,5.1 -7.2,8.1 z" fill="#ffffff" style="fill:#f2b640;fill-opacity:1"/></g></svg>`,
- mbmealprep: `<svg viewBox="0 0 64 64" width="64" height="64" xmlns="http://www.w3.org/2000/svg" ><rect width="64" height="64" rx="13" fill="#e0523d" x="0" y="0"/><g transform="translate(0,-3.7999965)"><path d="M 14,36 H 50 A 18,16 0 0 1 14,36 Z" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/><path d="m 23.5,30 c -3,-3.5 3,-5.5 0,-10 M 32,30 c -3,-3.5 3,-5.5 0,-10 m 8.5,10 c -3,-3.5 3,-5.5 0,-10" fill="none" stroke="#f2b640" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g></svg>`,
- mbactionplan: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="13" fill="#4F46A5"/><rect x="15" y="17" width="32" height="32" rx="7" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 33L28.5 38.5L39 27.5" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="48" cy="16" r="6.5" fill="#F2B640" stroke="#4F46A5" stroke-width="3"/></svg>`,
- mbauto: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" ><rect width="64" height="64" rx="13" fill="#256B8F"/><path d="m 16.5,43.990999 a 17,17 0 1 1 31,0" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="m 32,37.990999 10,-11" fill="none" stroke="#f2b640" stroke-width="5.5" stroke-linecap="round"/><circle cx="32" cy="37.990997" r="5" fill="#ffffff"/></svg>`,
- mbreading: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28"><rect width="28" height="28" rx="6" fill="#8a4479"/><g transform="matrix(0.9167,0,0,0.9167,3,4.3727814)"><path d="M 11.25,10.4 C 9.1,9 5.8,8.6 2.5,9.1 v 10 c 3.3,-0.5 6.6,0 8.75,1.4 z" fill="#ffffff"/><path d="M 12.75,10.4 C 14.9,9 18.2,8.6 21.5,9.1 v 10 c -3.3,-0.5 -6.6,0 -8.75,1.4 z" fill="#ffffff"/><path d="m 9.2,6.2 a 4,4 0 0 1 5.6,0 M 6.6,3.7 a 7.6,7.6 0 0 1 10.8,0" fill="none" stroke="#f2b640" stroke-width="1.9" stroke-linecap="round"/></g></svg>`,
- mbgardening: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" ><rect width="64" height="64" rx="13" fill="#2F7D32"/><path d="M 32,44 V 30" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="18" y="44" width="28" height="7" rx="2" fill="#f2b640"/><path d="m 27.3,44.5 v 6 m 9.4,-6 v 6" stroke="#2f7d32" stroke-width="2.2"/><path d="M 32,35 C 23,35 17.5,29.5 17.5,21.5 26,21.5 32,26.5 32,35 Z" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/><path d="M 32,29 C 32,20.5 37.5,14.5 46.5,14.5 46.5,23 40.5,29 32,29 Z" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/></svg>`,
- mbfishing: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="13" fill="#566F08"/><g transform="translate(32 32) scale(1.15) translate(-32 -32) translate(-1.5 0)"><path d="M42 32L54 22.5V41.5Z" fill="#F2B640" stroke="#F2B640" stroke-width="3" stroke-linejoin="round"/><path d="M13 32C20.5 21.5 35.5 21.5 44 32C35.5 42.5 20.5 42.5 13 32Z" fill="#fff" stroke="#fff" stroke-width="3" stroke-linejoin="round"/><circle cx="22" cy="30" r="2.6" fill="#566F08"/><path d="M30 26.5Q26.5 32 30 37.5" fill="none" stroke="#566F08" stroke-width="2.2" stroke-linecap="round"/></g></svg>`,
- mbweather: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" ><rect width="64" height="64" rx="12" fill="#0284c7"/><circle cx="25" cy="22.75" r="11" fill="#f6c453"/><path d="m 20,50.75 h 25 a 10.5,10.5 0 0 0 1.3,-20.9 14.2,14.2 0 0 0 -27.2,3.8 8.7,8.7 0 0 0 0.9,17.1 z" fill="#ffffff" stroke="#0284c7" stroke-width="3" paint-order="stroke" stroke-linejoin="round"/></svg>`,
- mbarcade: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="8" fill="#0f766e"/><rect x="12" y="12" width="40" height="40" rx="9" fill="none" stroke="#fff" stroke-width="6"/><circle cx="24" cy="24" r="5" fill="#fff"/><circle cx="40" cy="24" r="5" fill="#fff"/><circle cx="24" cy="40" r="5" fill="#fff"/><circle cx="40" cy="40" r="5" fill="#f2b640"/></svg>`
+ mbmoney: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbmo-g1" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#2b9172"/><stop offset=".55" stop-color="#087F5B"/><stop offset="1" stop-color="#066649"/></linearGradient><clipPath id="mbmo-c1"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#mbmo-c1)"><rect width="64" height="64" fill="url(#mbmo-g1)"/><g transform="translate(0,2.3)"><rect x="16" y="36" width="7" height="13" rx="1.5" fill="#ffffff" fill-opacity="0.55"/><rect x="28.5" y="30" width="7" height="19" rx="1.5" fill="#ffffff" fill-opacity="0.55"/><rect x="41" y="33" width="7" height="16" rx="1.5" fill="#ffffff" fill-opacity="0.55"/><path d="M 15,27 26,19 35,23.5 48,14" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="48" cy="14" r="3.5999999" fill="#ffffff"/></g></g></svg>`,
+ mbwishlist: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="13" fill="#D97706"/><g transform="translate(0,-0.02416552)"><path d="m 17,24.524164 h 30 l -2.5,26 h -25 z" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="m 25,24.524164 v -4 a 7,7 0 0 1 14,0 v 4" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="m 32,43.341388 c -4.6,-3 -7.2,-5.4 -7.2,-8.1 a 3.7,3.7 0 0 1 7.2,-1.2 3.7,3.7 0 0 1 7.2,1.2 c 0,2.7 -2.6,5.1 -7.2,8.1 z" fill="#f2b640"/></g></svg>`,
+ mbmealprep: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbme-g19" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#e46a58"/><stop offset=".55" stop-color="#E0523D"/><stop offset="1" stop-color="#b34231"/></linearGradient><clipPath id="mbme-c19"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#mbme-c19)"><rect width="64" height="64" fill="url(#mbme-g19)"/><rect x="14.5" y="18.5" width="35" height="27" rx="4" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M 33,19 V 45 M 33,32 H 49" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><rect x="16.151796" y="19.755266" width="15.855019" height="24.410162" rx="1.8294252" fill="#ffffff" fill-opacity="0.55" style="stroke-width:1.19065"/></g></svg>`,
+ mbactionplan: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbac-g7" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#6860b2"/><stop offset=".55" stop-color="#4F46A5"/><stop offset="1" stop-color="#3f3884"/></linearGradient><clipPath id="mbac-c7"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#mbac-c7)"><rect width="64" height="64" fill="url(#mbac-g7)"/><rect x="15.5" y="15.5" width="33" height="33" rx="5" stroke="#fff" stroke-opacity=".55" stroke-width="4.5" fill="none"/><path d="m 23,32.000052 6.5,6.5 11.5,-13" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg>`,
+ mbauto: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#44809f"/><stop offset=".55" stop-color="#256B8F"/><stop offset="1" stop-color="#1e5672"/></linearGradient><clipPath id="c"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#c)"><rect width="64" height="64" fill="url(#g)"/><path d="m 16.5,43.990999 a 17,17 0 1 1 31,0" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="m 32,37.990999 10,-11" fill="none" stroke="#F2B640" stroke-width="5.5" stroke-linecap="round"/><circle cx="32" cy="37.990997" r="5" fill="#fff"/></g></svg>`,
+ mbreading: `<svg viewBox="0 0 28 28" version="1.1" id="svg3" sodipodi:docname="favicon.svg" inkscape:version="1.4.2 (f4327f4, 2025-05-13)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs3" /> <sodipodi:namedview id="namedview3" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:zoom="28.821429" inkscape:cx="14" inkscape:cy="14" inkscape:window-width="1920" inkscape:window-height="1009" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:current-layer="svg3" /> <rect width="28" height="28" rx="6" fill="#8a4479" id="rect1" /> <g transform="matrix(0.9167,0,0,0.9167,2.9996,4.3727814)" id="g3"> <path d="M 11.25,10.4 C 9.1,9 5.8,8.6 2.5,9.1 v 10 c 3.3,-0.5 6.6,0 8.75,1.4 z" fill="#ffffff" id="path1" /> <path d="M 12.75,10.4 C 14.9,9 18.2,8.6 21.5,9.1 v 10 c -3.3,-0.5 -6.6,0 -8.75,1.4 z" fill="#ffffff" id="path2" /> <path d="m 9.2,6.2 a 4,4 0 0 1 5.6,0 M 6.6,3.7 a 7.6,7.6 0 0 1 10.8,0" fill="none" stroke="#f2b640" stroke-width="1.9" stroke-linecap="round" id="path3" /> </g> </svg>`,
+ mbgardening: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#4c8f4f"/><stop offset=".55" stop-color="#2F7D32"/><stop offset="1" stop-color="#266428"/></linearGradient><clipPath id="c1"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#c1)"><rect width="64" height="64" fill="url(#g1)"/><path d="M14 50c6-4.5 12-4.5 18 0s12 4.5 18 0" stroke="#fff" stroke-opacity=".55" stroke-width="4" stroke-linecap="round" fill="none"/><path d="M19 41C19 25 30 15 47 15C47 32 36 41 19 41Z" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M19 41L36 26" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg>`,
+ mbfishing: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbfi-g1" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#2d809a"/><stop offset=".55" stop-color="#0B6B8A"/><stop offset="1" stop-color="#09566e"/></linearGradient><clipPath id="mbfi-c1"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#mbfi-c1)"><rect width="64" height="64" fill="url(#mbfi-g1)"/><g transform="translate(0,-5.8128604)"><path transform="translate(0.8,-1.5)" d="m 12,51.5 c 3.2,-2.6 6.4,-2.6 9.6,0 3.2,2.6 6.4,2.6 9.6,0 3.2,-2.6 6.4,-2.6 9.6,0 3.2,2.6 6.4,2.6 9.6,0" stroke="#ffffff" stroke-opacity="0.55" stroke-width="3.5" stroke-linecap="round" fill="none"/><g transform="translate(0.75)"><path d="m 20,32 c 6,-9.5 21,-11.5 30,0 -9,11.5 -24,9.5 -30,0 z" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M 20,32 12.5,25 V 39 Z" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="42.5" cy="29.5" r="2.5999999" fill="#ffffff"/></g></g></g></svg>`,
+ mbweather: `<svg viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbwe-g25" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#2595cf"/><stop offset=".55" stop-color="#0284C7"/><stop offset="1" stop-color="#026a9f"/></linearGradient><clipPath id="mbwe-c25"><rect width="64" height="64" rx="18"/></clipPath><linearGradient xlink:href="#mbwe-g25" id="mbwe-linearGradient5" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"/></defs><g clip-path="url(#mbwe-c25)"><rect width="64" height="64" fill="url(#mbwe-g25)"/><g transform="translate(-0.66503232,1.1221731)"><circle cx="41" cy="22.5" r="10" fill="#ffffff" fill-opacity="0.55"/><path d="M 21.5,47 H 43 A 8.005623,8.005623 0 0 0 43.6,31 11,11 0 0 0 22.4,28.8 9.2,9.2 0 0 0 21.5,47 Z" fill="url(#mbwe-g25)" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" style="fill:url(#mbwe-linearGradient5)"/></g></g></svg>`,
+ mbnotes: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="nfav-g" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#edbe2b"/><stop offset=".55" stop-color="#EAB308"/><stop offset="1" stop-color="#bb8f06"/></linearGradient><clipPath id="nfav-c"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#nfav-c)"><rect width="64" height="64" fill="url(#nfav-g)"/><path d="M24 26.5h16M24 33.5h16M24 40.5h9" stroke="#fff" stroke-opacity=".55" stroke-width="4" stroke-linecap="round" fill="none"/><path d="M17.5 14.5h21.5l7.5 7.5v27.5h-29z" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M39 14.5v7.5h7.5" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg>`,
+ mbpayday: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="pdg" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#C73874"/><stop offset=".55" stop-color="#BE185D"/><stop offset="1" stop-color="#98134A"/></linearGradient><clipPath id="pdc"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#pdc)"><rect width="64" height="64" fill="url(#pdg)"/><g transform="translate(3.2 3.6) scale(.9)"><rect x="29.75" y="13" width="4.5" height="6.5" fill="#fff"/><rect x="25.5" y="8.5" width="13" height="6.5" rx="3" fill="#F2B640"/><rect x="42.13" y="19.57" width="5.2" height="8.4" rx="2" fill="#fff" transform="rotate(45 44.73 23.77)"/><circle cx="32" cy="36.5" r="18" fill="#fff"/><path d="M32 25.6v3.2M32 44.6v3.2" stroke="#A8154F" stroke-width="3.4" stroke-linecap="round"/><path d="M37.2 31.4C36.2 29.7 34.3 28.8 32 28.8 29.2 28.8 27.1 30.3 27.1 32.5 27.1 37.4 37.1 35.2 37.1 40.4 37.1 42.7 34.9 44.4 32 44.4 29.5 44.4 27.6 43.4 26.7 41.6" fill="none" stroke="#A8154F" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/></g></g></svg>`,
 };
+// Install buttons open the app with ?install; the app shows its own install prompt (mb-install.js v3.1).
+// To add one for a new app: give its APPS entry install:true (the app must ship mb-install.js v3.1 or later).
+function installUrl(a) { return a.url.replace(/\/$/, "") + "/?install"; }
 function appIcon(a) {
  const svg = LOGOS[a.id];
  return svg
@@ -688,8 +691,8 @@ function appIcon(a) {
 }
 const CATS = ["All", "Finance", "Lifestyle", "Productivity", "Assets", "Knowledge", "Utilities"];
 const STATUS = Object.fromEntries(APPS.map(a => [a.id, {state:"unknown"}]));
-const STATS_KEY = "mb_hub_launches_v5", PIN_KEY = "mb_hub_pins_v5", THEME_KEY = "mb_hub_theme", NOTICE_KEY = "mb_hub_notice_v5", DONATE_KEY = "mb_hub_donate_dismiss_v1";
-const DONATE_SNOOZE_MS = 30 * 24 * 60 * 60 * 1000; // "Remind me later" (or clicking donate) waits 30 days before showing again — at least monthly
+const STATS_KEY = "mb_hub_launches_v5", PIN_KEY = "mb_hub_pins_v5", THEME_KEY = "mb_hub_theme", NOTICE_KEY = "mb_hub_notice_v5";
+const OLD_KEYS = ["mb_hub_donate_dismiss_v1", "mb_hub_cookie"]; // no longer written; Delete Local Data still removes them
 
 // Validate anything read back from storage so a corrupted or hand-edited value can't break the page.
 const APP_IDS = APPS.map(a => a.id);
@@ -738,7 +741,7 @@ function renderFilters() {
 function filteredApps() {
  const q = state.search.trim().toLowerCase();
  return APPS.filter(a => (state.category === "All" || a.category === state.category) && (!q || [a.name, a.domain, a.category, a.tagline, a.description, ...a.features].join(" ").toLowerCase().includes(q))).sort((a,b) => {
-   const ap = state.pins.includes(a.id)?1:0, bp = state.pins.includes(b.id)?1:0; return bp - ap || APPS.indexOf(a) - APPS.indexOf(b);
+   const ap = state.pins.includes(a.id)?1:0, bp = state.pins.includes(b.id)?1:0; return bp - ap || a.name.localeCompare(b.name, "en", {sensitivity:"base"});
  });
 }
 
@@ -767,12 +770,13 @@ function renderApps() {
   <div class="cardFooter">
    <div class="cardMeta" title="${statusLabel(a)}">
     <span class="liveDot ${s.state}" aria-hidden="true"></span>
-    <span class="domain">${esc(a.domain)}</span>
+    <span class="domain">${esc(a.domain)}™</span>
     ${s.state === "offline" ? `<span class="liveNote bad">Unreachable</span>` : s.state === "checking" ? `<span class="liveNote">Checking…</span>` : `<span class="vh">${statusLabel(a)}</span>`}
    </div>
    <div class="footerActions">
-    <button class="btn details" data-details="${a.id}" type="button" aria-label="Details for ${esc(a.name)}">Details</button>
-    <a class="btn launch" data-launch="${a.id}" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(a.name)} in a new tab">Open<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+    <button class="btn details" data-details="${a.id}" type="button" aria-label="Details for ${esc(a.name)}" title="Details"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg></button>
+    ${a.install ? `<a class="btn install" href="${esc(installUrl(a))}" aria-label="Install ${esc(a.name)}" title="Opens ${esc(a.domain)} with its install prompt">Install</a>` : ""}
+    <a class="btn launch" data-launch="${a.id}" href="${esc(a.url)}" aria-label="Open ${esc(a.name)}">Open</a>
    </div>
   </div>
  </article>`;
@@ -824,6 +828,7 @@ function openModal(modalId, appId = null) {
   document.getElementById("modalStatus").textContent = statusLabel(a);
   document.getElementById("modalLaunches").textContent = state.launches[a.id] || 0;
   const launch = document.getElementById("modalLaunch"); launch.href = a.url;
+  const inst = document.getElementById("modalInstall"); inst.hidden = !a.install; if (a.install) inst.href = installUrl(a);
   launch.onclick = () => { state.launches[a.id] = (state.launches[a.id] || 0) + 1; save(STATS_KEY, state.launches); };
   document.getElementById("modalCopy").onclick = () => { copyText(a.url); showToast("URL copied"); };
  }
@@ -867,8 +872,7 @@ function exportHubData() {
     site: "matthewbroyer.com hub",
     theme: state.theme,
     pins: state.pins,
-    launches: state.launches,
-    donateReminderLastDismissedAt: load(DONATE_KEY, null)
+    launches: state.launches
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
@@ -966,17 +970,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("storageBanner").classList.remove("show");
  });
 
- // Donation reminder: shows on first visit, then waits 30 days after either button is used ("remind me later" or "buy me a coffee").
- const lastDonateDismiss = load(DONATE_KEY, 0);
- if (!lastDonateDismiss || (Date.now() - lastDonateDismiss) >= DONATE_SNOOZE_MS) {
-  setTimeout(() => { document.getElementById("donateBanner").hidden = false; }, 700);
- }
- function snoozeDonateBanner() {
-  save(DONATE_KEY, Date.now());
-  document.getElementById("donateBanner").hidden = true;
- }
- document.getElementById("donateLaterBtn").addEventListener("click", snoozeDonateBanner);
- document.getElementById("donateBtn").addEventListener("click", snoozeDonateBanner);
 
  document.getElementById("openPrivacy").addEventListener("click", () => openModal("privacyModal"));
  document.getElementById("openTerms").addEventListener("click", () => openModal("termsModal"));
@@ -984,7 +977,7 @@ document.addEventListener("DOMContentLoaded", () => {
  document.getElementById("triggerResetBtn").addEventListener("click", () => openModal("confirmModal"));
  document.getElementById("confirmResetBtn").addEventListener("click", () => {
   try {
-   [STATS_KEY, PIN_KEY, THEME_KEY, NOTICE_KEY, DONATE_KEY, "mb_hub_cookie"].forEach(k => localStorage.removeItem(k));
+   [STATS_KEY, PIN_KEY, THEME_KEY, NOTICE_KEY, ...OLD_KEYS].forEach(k => localStorage.removeItem(k));
   } catch(_) {
    closeModal("confirmModal");
    showToast("Couldn’t reach browser storage. Clear this site’s data in your browser settings.");
